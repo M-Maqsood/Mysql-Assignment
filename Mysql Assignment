@@ -1,0 +1,166 @@
+# Q1. What is a database? Differentiate between SQL and NoSQL databases.
+'''
+A database is a structured collection of data that is organized in a way that allows for efficient storage, retrieval, and manipulation of the data.
+
+In simple terms, a database is a digital repository where information is stored, managed, and accessed. It can be thought of as a filing system for electronic data, with each piece of information stored in a specific place or location within the database.
+
+Databases are used in many different applications, such as managing customer information in a business, storing financial records, tracking inventory, and organizing scientific data. They are also a key component of many web and mobile applications, as they provide a way to store and retrieve information for Chan_table.
+
+Some examples of commonly used databases include MySQL, Oracle, Microsoft SQL Server, and MongoDB.
+
+'''
+# Differentiate between SQL and NoSQL databases.
+''' 
+SQL(Structured Query language):
+SQL (Structured Query Language) databases are relational databases that use tables to store data. 
+They have a predefined schema, which means the structure of the data is determined in advance and any changes to the schema require careful planning and migration. 
+SQL databases are known for their consistency, reliability, and ability to handle complex queries. 
+Some common examples of SQL databases are MySQL, Oracle, and PostgreSQL.
+
+NoSQL(Unstructured data):
+NoSQL (Not Only SQL) databases, on the other hand, do not rely on a fixed schema and are designed to handle large amounts of unstructured or semi-structured data. 
+They do not use tables to store data, but instead use different data models such as document-oriented, key-value, or graph databases. 
+NoSQL databases are known for their scalability, high availability, and ability to handle unstructured data. 
+Some common examples of NoSQL databases are MongoDB, Cassandra, and Redis.
+'''
+
+# Q2. What is DDL? Explain why CREATE, DROP, ALTER, and TRUNCATE are used with an example.
+'''
+DDL stands for Data Definition Language and is a set of SQL commands used to define the structure of a database, 
+including creating and modifying database objects such as tables, indexes, and views.
+
+CREATE: This command is used to create a new database object, such as a table, index, or view. 
+For example, the following SQL statement creates a new table called "Chan_table" with columns for "id", "name", and "email":
+CREATE TABLE Chan_table (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    email VARCHAR(50)
+);
+
+DROP: This command is used to delete a database object, such as a table, index, or view. 
+For example, the following SQL statement drops the "Chan_table" table:
+
+DROP TABLE Chan_table;
+
+
+ALTER: This command is used to modify the structure of an existing database object. 
+For example, the following SQL statement adds a new column called "phone" to the "Chan_table" table:
+
+ALTER TABLE Chan_table
+ADD phone VARCHAR(20);
+
+
+TRUNCATE: This command is used to remove all the data from a table while keeping the structure intact. 
+For example, the following SQL statement removes all the data from the "Chan_table" table:
+
+TRUNCATE TABLE Chan_table;
+
+'''
+
+# Q3. What is DML? Explain INSERT, UPDATE, and DELETE with an example.
+'''
+DML stands for Data Manipulation Language and is a set of SQL commands used to manipulate data within a database. 
+DML commands are used to insert, update, and delete data from database tables.
+
+INSERT: This command is used to insert new rows into a table. For example, the following SQL statement inserts a new row into the "Chan_table" table:
+INSERT INTO Chan_table (name, email) VALUES ('chandan', 'chandan@example.com');
+
+
+UPDATE: This command is used to update existing rows in a table. 
+For example, the following SQL statement updates the email address of the user with the name 'chandan':
+
+UPDATE Chan_table
+SET email = 'hello@example.com'
+WHERE name = 'chandan';
+
+
+DELETE: This command is used to delete rows from a table. 
+For example, the following SQL statement deletes the row from the "Chan_table" table where the name is 'chandan':
+
+DELETE FROM Chan_table
+WHERE name = 'chandan';
+
+'''
+
+# Q4. What is DQL? Explain SELECT with an example.
+'''
+DQL stands for Data Query Language and is a subset of SQL commands used to query data from a database. 
+DQL commands are used to retrieve data from database tables.
+The most commonly used DQL command is SELECT, which is used to query data from one or more database tables. 
+SELECT is a powerful command that allows you to specify exactly which data you want to retrieve from a database, based on a set of criteria.
+
+SELECT * FROM Ankit;
+SELECT name, email FROM Ankit;
+SELECT * FROM Ankit
+WHERE name = 'Rahul';
+
+'''
+
+# Q5. Explain Primary Key and Foreign Key.
+'''
+PRIMARY KEY:-
+A primary key is a column or set of columns in a table that uniquely identifies each row in the table. 
+The primary key must be unique and cannot contain null values. It is used to enforce data integrity and ensure that there are no duplicate rows in the table. 
+For example, in a table of "users", the "id" column might be used as the primary key, since it uniquely identifies each user.
+
+
+FOREIGN KEY:-
+A foreign key is a column or set of columns in one table that refers to the primary key in another table. 
+It is used to establish a relationship between two tables, allowing data to be shared and used across multiple tables. 
+For example, in a table of "orders", a "user_id" column might be used as a foreign key to refer to the "id" column in the "users" table. This allows you to associate each order with a specific user.
+
+When a foreign key is defined in a table, it creates a constraint that ensures that the values in the foreign key column must match the values in the primary key column of the referenced table. 
+This ensures that the data is consistent and that there are no orphaned rows in the table.
+For example, if a row is deleted from the "users" table, the corresponding rows in the "orders" table with the same user_id value should also be deleted or updated accordingly.
+
+'''
+
+# Q6. Write a python code to connect MySQL to python. Explain the cursor() and execute() method.
+'''
+To connect to MySQL from Python, we need to use a connector package. 
+The most popular connector for Python is the MySQL Connector/Python, which can be installed using pip.
+import mysql.connector
+
+# Connect to the database
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="Chandan",
+  password="123456789",
+  database="mydatabase"
+)
+# Create a cursor
+mycursor = mydb.cursor()
+
+# Execute a SQL query
+mycursor.execute("SELECT * FROM customers")
+
+# Fetch the results
+results = mycursor.fetchall()
+
+# Print the results
+for i in results:
+  print(i)
+
+'''
+
+# Q7. Give the order of execution of SQL clauses in an SQL query.
+'''
+SQL clauses:-
+FROM: The FROM clause specifies the table(s) from which the data is selected.
+
+JOIN: If multiple tables are involved in the query, the JOIN clause is used to combine the data from the tables based on a specified condition.
+
+WHERE: The WHERE clause is used to filter the data based on a specified condition. Only the rows that satisfy the condition are selected.
+
+GROUP BY: The GROUP BY clause is used to group the data based on one or more columns. This is often used with aggregate functions, such as SUM or COUNT, to summarize data.
+
+HAVING: The HAVING clause is used to filter the data based on a specified condition, similar to the WHERE clause. However, it is used with the GROUP BY clause to filter the groups of rows rather than individual rows.
+
+SELECT: The SELECT clause is used to select the columns to be displayed in the output. This clause is usually the most visible and recognizable part of the SQL query.
+
+ORDER BY: The ORDER BY clause is used to sort the data based on one or more columns. By default, the data is sorted in ascending order, but the DESC keyword can be used to sort in descending order.
+
+LIMIT: The LIMIT clause is used to limit the number of rows returned by the query. This is often used in conjunction with the ORDER BY clause to get the top N rows.
+
+
+'''
